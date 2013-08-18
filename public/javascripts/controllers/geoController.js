@@ -12,6 +12,7 @@ function GeoCtrl(	$rootScope, $scope, $window) {
             });
         }, function(error) {
             console.log(error);
+						$scope.findMe2();
         });
     };
 
