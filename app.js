@@ -76,8 +76,8 @@ function getVelibs() {
 	});
 	reqGet.end();
 }
-
-setInterval(getVelibs, 10000);
+getVelibs();
+setInterval(getVelibs, 7000);
 //*******************//
 
 

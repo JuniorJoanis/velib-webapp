@@ -1,12 +1,13 @@
 function GmapCtrl($scope, $timeout, $log){
 	google.maps.visualRefresh = true;
+	$scope.dynamicMarkers = function(){
+		return stations_markers;
+	}
+	
 	angular.extend($scope, {
 
 	    position: {
-	      coords: {
-	        latitude: 48.845,
-	        longitude: 2.3509
-	      }
+	      coords: user_position
 	    },
 		// 
 		// /** the initial center of the map */
@@ -21,7 +22,7 @@ function GmapCtrl($scope, $timeout, $log){
 		/** list of markers to put in the map */
 		markersProperty: [],
 			
-		dynamicMarkers: [],
+		dynamicMarkers: $scope.dynamicMarkers,
 		 
 		// These 2 properties will be set when clicking on the map
 		clickedLatitudeProperty: null,	
@@ -45,10 +46,31 @@ function GmapCtrl($scope, $timeout, $log){
 	//               onMarkerClicked(marker);
 	//           };
 	//       });
+	
+
+	$scope.removeMarkers = function () {
+        $log.info("Clearing markers. They should disappear from the map now");
+        $scope.dynamicMarkers = function(){
+					return [];
+				}
+    };
+
 
 	$scope.$on('velibMarkersEvent', function(event, mass) {
+		$scope.removeMarkers();
 		console.log("velibMarker Event !!");
-		$scope.dynamicMarkers = mass;
+		$scope.dynamicMarkers = function(){
+			return mass;
+		}
+	
+	
 	});
+	
+	$scope.$on('userPositionEvent', function(event, mass) {
+		console.log("userPositionEvent Event !!"+mass.latitude + " | "+ mass.longitude);
+		$scope.position.coords.latitude = mass.latitude;
+		$scope.position.coords.longitude = mass.longitude;
+	});
+	
 	
 }

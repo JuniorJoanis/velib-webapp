@@ -12,12 +12,13 @@
 		<script src="javascripts/app.js"></script>
 		<script src="javascripts/controllers/velibController.js"></script>
 		<script src="javascripts/controllers/gmapController.js"></script>
+		<script src="javascripts/controllers/geoController.js"></script>
 		 <link rel='stylesheet' href='/stylesheets/style.css' />
 	
 		 <title><%= title %></title>
 	</head>
 	<body>
-		<div class="wrap">
+		<div class="wrap" ng-controller="GeoCtrl">
 			<!-- Fixed navbar -->
       <div class="navbar navbar-fixed-top">
         <div class="container">
@@ -32,7 +33,7 @@
           <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
               <li class=""><a href="#">Home</a></li>
-              <li><a href="http://github.com/juniorjoanis">github</a></li>
+              <li><a href="http://github.com/juniorjoanis" target="_blank" >github</a></li>
             </ul>
 						<ul class="nav navbar-nav navbar-right" ng-controller="VelibCtrl">
 							<li>
@@ -40,10 +41,10 @@
 							<form class="form-inline" >
 								<div class="form-group">
 							    <label class="sr-only" for="cityInput">City</label>
-									<input type="text" ng-model="searchText"  class="form-control" id="cityInput" placeholder="City" >
+									<input type="text"  disabled="disabled" ng-model="searchText"  class="form-control" id="cityInput" placeholder="City" >
 							  </div>
 								
-								<button class="btn btn-default" ng-click="doSearchByCity()" ><i class="icon-search"></i> Search</button>
+								<button class="btn btn-default" disabled="disabled" ng-click="doSearchByCity()" ><i class="icon-search"></i> Search</button>
 							</form>
 								</a>
 							</li>
@@ -56,13 +57,13 @@
       </div>
 
 		<div ng-controller="GmapCtrl">
-			
+			<button class="btn btn-default hidden"  ng-click="removeMarkers()" ><i class="icon-remove"></i> remove markers</button>
 			<div class="google-map" 
 				center="position.coords"
 				zoom="zoomProperty" 
 				latitude="clickedLatitudeProperty"
 				longitude="clickedLongitudeProperty"
-				markers = "dynamicMarkers"
+				markers = "dynamicMarkers()"
 				draggable="true"
 				fit="false"
 				events="eventsProperty"
@@ -73,7 +74,7 @@
 	
 		<div id="footer">
       <div class="container">
-        <p class="text-muted credit">Angularjs + Nodejs experience by <a href="http://twitter.com/juniorjoanis">Junior Joanis</a></p>
+        <p class="text-muted credit">Angularjs + Nodejs experience by <a href="http://twitter.com/juniorjoanis" target="_blank">Junior Joanis</a></p>
       </div>
     </div>
 			</div>

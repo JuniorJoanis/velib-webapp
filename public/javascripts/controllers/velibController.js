@@ -24,16 +24,15 @@ function VelibCtrl ($rootScope, $scope, $http, $resource) {
  		$scope.velib().query(function(result){
 			stations_markers = [];
 			result.forEach(function(e){
-			var _icon = e.available_bikes == "0" ? "http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=0" : "http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld="+e.available_bikes+"|FE6256|000000"
+			  var _icon = e.available_bikes == "0" ? "http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=0" : "http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld="+e.available_bikes+"|FE6256|000000"
 			
-			stations_markers.push({ latitude: e.position.lat, longitude: e.position.lng,  icon: _icon});
+				stations_markers.push({ latitude: e.position.lat, longitude: e.position.lng,  icon: _icon});
 			});
 			$rootScope.$broadcast('velibMarkersEvent', stations_markers);
-			$rootScope.$broadcast('velibcallEvent', 1);
 		});
 	}
 	
-	$scope.$on('velibcallEvent', function(event, mass) {
+	$scope.$on('velibMarkersEvent', function(event, mass) {
 		console.log("velibResult Event Call !!");
 		$scope.velibResult();
 	});
