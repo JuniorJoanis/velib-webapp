@@ -27,8 +27,8 @@ function VelibCtrl ($rootScope, $scope, $http, $resource) {
 			var _icon = e.available_bikes == "0" ? "http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=0" : "http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld="+e.available_bikes+"|FE6256|000000"
 			
 			stations_markers.push({ latitude: e.position.lat, longitude: e.position.lng,  icon: _icon});
-			$rootScope.$broadcast('velibMarkersEvent', stations_markers);
 			});
+			$rootScope.$broadcast('velibMarkersEvent', stations_markers);
 			$rootScope.$broadcast('velibcallEvent', 1);
 		});
 	}
