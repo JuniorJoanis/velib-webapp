@@ -2,7 +2,7 @@
 /**
  * Module dependencies.
  */
-
+var config = require('./config/config.json');
 var express = require('express');
 var routes = require('./routes');
 var user = require('./routes/user');
@@ -42,7 +42,7 @@ app.get('/users', user.list);
 //*******************//
 var opts = {
 	host : 'api.jcdecaux.com',
-	path : '/vls/v1/stations?apiKey=c45323fc7cd54597443256e5c594e35020a49822&contract=Paris',	
+	path : '/vls/v1/stations?apiKey='+config.apiKey+'&contract=Paris',	
 	method : 'GET' 
 };
 
@@ -52,7 +52,6 @@ var velibs;
 console.info('Options prepared:');
 console.info(opts);
 console.info('Do the GET call');
-
 function getVelibs() {
 	var reqGet = https.request(opts, function(res) {
 	    console.log("statusCode: ", res.statusCode);
