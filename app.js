@@ -2,8 +2,8 @@
 /**
  * Module dependencies.
  */
-var config = require('./config/config.json');
-var open_data_api_key = process.env.OPEN_DATA_API_KEY || config.apiKey
+var config = require('./config/config.json') || null;
+var open_data_api_key = process.env.OPEN_DATA_API_KEY ||  require('./config/config.json').apiKey
 var express = require('express');
 var routes = require('./routes');
 var user = require('./routes/user');
