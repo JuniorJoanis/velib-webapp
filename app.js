@@ -3,6 +3,7 @@
  * Module dependencies.
  */
 var config = require('./config/config.json');
+var open_data_api_key = process.env.OPEN_DATA_API_KEY || config.apiKey
 var express = require('express');
 var routes = require('./routes');
 var user = require('./routes/user');
@@ -42,7 +43,7 @@ app.get('/users', user.list);
 //*******************//
 var opts = {
 	host : 'api.jcdecaux.com',
-	path : '/vls/v1/stations?apiKey='+config.apiKey+'&contract=Paris',	
+	path : '/vls/v1/stations?apiKey='+open_data_api_key+'&contract=Paris',	
 	method : 'GET' 
 };
 
