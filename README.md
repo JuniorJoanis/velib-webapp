@@ -15,6 +15,7 @@ The app is deployed on heroku : [velib-webapp.com](http://stormy-anchorage-2795.
 ## Improvement :
 
 Thanks to the Open Data more city with a bike system should be available.
+Install Meteor.
 
 ## And more?
 Usefull links:
