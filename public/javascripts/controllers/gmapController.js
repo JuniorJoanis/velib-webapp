@@ -22,7 +22,7 @@ function GmapCtrl($scope, $timeout, $log){
 		/** list of markers to put in the map */
 		markersProperty: [],
 			
-		dynamicMarkers: $scope.dynamicMarkers,
+		markers: $scope.dynamicMarkers,
 		 
 		// These 2 properties will be set when clicking on the map
 		clickedLatitudeProperty: null,	

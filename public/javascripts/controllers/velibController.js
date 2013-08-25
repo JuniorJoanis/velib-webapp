@@ -1,4 +1,4 @@
-function VelibCtrl ($rootScope, $scope, $http, $resource) {
+function VelibCtrl ($rootScope, $scope, $log, $http, $resource) {
 	//$http.defaults.useXDomain = true;
 	
 	$scope.title = "Velib WebApp";
@@ -19,23 +19,34 @@ function VelibCtrl ($rootScope, $scope, $http, $resource) {
 					});	
 	};
 		
-					
+	var iterator = 0;
+	var call_number = 1;
 	$scope.velibResult = function (){
- 		$scope.velib().query(function(result){
-			stations_markers = [];
-			result.forEach(function(e){
-			  var _icon = e.available_bikes == "0" ? "http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=0" : "http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld="+e.available_bikes+"|FE6256|000000"
+		if (call_number == 1){
+			$scope.$emit('LOAD');
+		}
+		
+ 		$scope.velib().get(function(result){
+			var _stations_markers = {};
 			
-				stations_markers.push({ latitude: e.position.lat, longitude: e.position.lng,  icon: _icon});
+			result.forEach(function(e){
+				if (e.position.lat != undefined || e.position.lng != undefined ){
+					var _pluralize = e.available_bikes > 0 ? "s" : "" ;
+					var _message = e.available_bikes+" velo"+_pluralize+" disponible";
+					_stations_markers[iterator] = { lat: parseFloat(e.position.lat), lng: parseFloat(e.position.lng),  message: _message , available_bikes: parseFloat(e.available_bikes)};
+				}
+				iterator++;
 			});
-			$rootScope.$broadcast('velibMarkersEvent', stations_markers);
+			if (call_number == 1){
+				$scope.$emit('UNLOAD');
+			}
+			call_number++;
+			$rootScope.$broadcast('velibMarkersEvent', _stations_markers);
+			
+			setTimeout($scope.velibResult(), 5000);
 		});
 	}
 	
-	$scope.$on('velibMarkersEvent', function(event, mass) {
-		console.log("velibResult Event Call !!");
-		$scope.velibResult();
-	});
 	
 	$scope.velibResult();
 	
