@@ -85,6 +85,7 @@ app.get('/velibs.json', function(req, res){
 	var url_parts = url.parse(req.url, true);
 	var query = url_parts.query;
 	console.log(query['contract']);
+	res.end(JSON.stringify(velibs));
 	var listener = velib_emitter.addListener("velibs", function(velibs) {  
 			call_number +=1 ;
       res.end(JSON.stringify(velibs));  
