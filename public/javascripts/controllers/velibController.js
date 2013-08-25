@@ -43,7 +43,7 @@ function VelibCtrl ($rootScope, $scope, $log, $http, $resource) {
 			call_number++;
 			$rootScope.$broadcast('velibMarkersEvent', _stations_markers);
 			
-			setTimeout($scope.velibResult(), 5000);
+			setTimeout($scope.velibResult(), 10000);
 		});
 	}
 	

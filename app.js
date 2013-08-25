@@ -77,7 +77,7 @@ function getVelibs() {
 	reqGet.end();
 }
 getVelibs();
-setInterval(getVelibs, 7000);
+setInterval(getVelibs, 10000);
 //*******************//
 
 
